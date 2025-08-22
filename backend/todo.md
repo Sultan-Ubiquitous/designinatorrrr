@@ -9,3 +9,4 @@
             color scheme(what color goes where)
             Typography but only for large pages and not functional components
                                 _Push it to later_
+5. Take files and store it in a database, first just store names and only store needed files

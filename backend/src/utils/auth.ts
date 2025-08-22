@@ -1,24 +1,19 @@
-// import { betterAuth } from "better-auth";
-// import { prismaAdapter } from "better-auth/adapters/prisma";
+import { betterAuth } from "better-auth";
+import { prismaAdapter } from "better-auth/adapters/prisma";
+import 'dotenv/config';
+import prisma from "./prisma.js";
 
-// import prisma from "./prisma";
-
-// const auth = betterAuth({
-//     database: prismaAdapter(prisma, {
-//         provider: 'postgresql',
-//     }),
-//     emailAndPassword:{
-//         enabled: true,
-//     },
-//     socialProviders:{
-//         github:{
-//             clientId: process.env.GITHUB_CLIENT_ID as string,
-//             clientSecret: process.env.GITHUB_CLIENT_SECRET as string,
-//         },
-//         google:{
-//             clientId: process.env.GOOGLE_CLIENT_ID as string, 
-//             clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
-//         }
-//     }
-// })
-// export default auth;
+const auth = betterAuth({
+    database: prismaAdapter(prisma, {
+        provider: 'postgresql',
+    }),
+    socialProviders:{
+        google:{
+            prompt: "select_account+consent",
+            clientId: process.env.GOOGLE_AUTH_CLIENT_ID as string, 
+            clientSecret: process.env.GOOGLE_AUTH_CLIENT_SECRET as string,
+        }
+    },
+    trustedOrigins: ['http://localhost:3003']
+})
+export default auth;
