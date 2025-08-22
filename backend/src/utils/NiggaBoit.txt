@@ -1,0 +1,3177 @@
+
+                // ======================================================
+                // File: dashboard/index.html
+                // ======================================================
+
+                <!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hospital Admin</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
+
+                
+                // ======================================================
+                // File: dashboard/src/App.css
+                // ======================================================
+
+                @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  font-family: "Montserrat", sans-serif;
+}
+body {
+  background: #3939d9f2;
+}
+.container {
+  padding: 0 100px;
+}
+@media (max-width: 700px) {
+  .container {
+    padding: 0 20px;
+  }
+}
+.page {
+  margin-left: 120px;
+  background: #e5e5e5;
+  padding: 40px;
+  height: 100vh;
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+}
+@media (max-width: 1208px) {
+  .page {
+    margin-left: 0;
+    border-radius: 0;
+  }
+}
+@media (max-width: 485px) {
+  .page {
+    padding: 40px 20px;
+  }
+}
+@media (max-width: 460px) {
+  .logo {
+    width: 100%;
+  }
+}
+.form-title{
+  font-size: 1.75rem;
+  color: #111;
+  margin-bottom: 30px;
+}
+.form-component {
+  padding-top: 40px;
+  padding-bottom: 60px;
+  min-height: 100vh;
+  background: #e5e5e5;
+
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.form-component h2 {
+  color: gray;
+  letter-spacing: 4px;
+  margin-bottom: 30px;
+}
+.form-component h4 {
+  color: gray;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+.form-component p {
+  max-width: 750px;
+  color: gray;
+  margin-bottom: 20px;
+  text-align: center;
+}
+.form-component form {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  width: 550px;
+}
+.add-admin-form form {
+  width: 100%;
+}
+.form-component p:first-child {
+  font-size: 28px;
+  font-weight: 700;
+  color: #370080a3;
+  margin-top: 30px;
+}
+.form-component form div {
+  display: flex;
+  gap: 30px;
+}
+.form-component form input,
+.form-component form select,
+.form-component form textarea {
+  flex: 1;
+  font-size: 24px;
+  padding: 10px 10px 10px 40px;
+  border-radius: 7px;
+  border: 1px solid gray;
+}
+.form-component button {
+  padding: 10px 35px;
+  color: #fff;
+  font-weight: 700;
+  width: fit-content;
+  border: none;
+  border-radius: 8px;
+  font-size: 24px;
+  margin-bottom: 30px;
+  background: linear-gradient(140deg, #9083d5, #271776ca);
+}
+.form-component .wrapper {
+  display: flex;
+  gap: 50px;
+}
+.form-component .wrapper .banner {
+  flex: 1;
+}
+.form-component .wrapper .banner:last-child {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.form-component .wrapper .banner:last-child img {
+  max-width: 450px;
+}
+@media (max-width: 888px) {
+  .form-component {
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+  .form-component form div {
+    flex-direction: column;
+  }
+}
+@media (max-width: 667px) {
+  .form-component form input,
+  .form-component form select,
+  .form-component form textarea {
+    font-size: 20px;
+    padding: 10px;
+  }
+}
+@media (max-width: 600px) {
+  .form-component form {
+    width: 100%;
+  }
+}
+@media (max-width: 485px) {
+  .add-admin-form {
+    padding: 30px 0;
+  }
+}
+
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.dashboard .banner:first-child {
+  height: 35vh;
+  display: flex;
+  gap: 20px;
+}
+.dashboard .banner:first-child .firstBox {
+  flex: 2;
+  display: flex;
+  align-items: center;
+  border-radius: 20px;
+  background: #b5b5ff;
+  padding: 20px 20px 0 10px;
+}
+.dashboard .banner:first-child .firstBox img {
+  height: 100%;
+  flex: 1;
+}
+.dashboard .banner:first-child .firstBox .content {
+  flex: 2;
+}
+.dashboard .banner:first-child .firstBox .content div {
+  display: flex;
+  align-items: center;
+  font-size: 34px;
+  margin-bottom: 12px;
+}
+.dashboard .banner:first-child .firstBox .content div p {
+  margin-right: 10px;
+  font-size: 34px;
+}
+.dashboard .banner:first-child .firstBox .content div h5 {
+  color: #ff008d;
+}
+.dashboard .banner:first-child .firstBox .content p {
+  font-size: 16px;
+}
+.dashboard .banner:first-child .secondBox {
+  background: #3939d9f2;
+  color: #fff;
+}
+.dashboard .banner:first-child .thirdBox {
+  color: #ff008d;
+  background: #fff;
+}
+.dashboard .banner:first-child .secondBox,
+.dashboard .banner:first-child .thirdBox {
+  flex: 1;
+  border-radius: 20px;
+  padding: 20px 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+}
+.dashboard .banner:first-child .secondBox p,
+.dashboard .banner:first-child .thirdBox p {
+  font-size: 24px;
+  font-weight: 600;
+}
+.dashboard .banner:first-child .secondBox h3,
+.dashboard .banner:first-child .thirdBox h3 {
+  font-size: 34px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+.dashboard .banner:last-child {
+  height: 65vh;
+  background: #fff;
+  border-radius: 20px;
+  padding: 40px;
+}
+.dashboard .banner:last-child h5 {
+  font-size: 24px;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+  color: #111;
+}
+.dashboard .banner table {
+  width: 100%;
+  color: #111;
+  font-size: 20px;
+}
+.dashboard .banner table select {
+  font-size: 20px;
+  border: none;
+  width: 100%;
+  font-weight: 600;
+}
+.dashboard table td svg{
+  display: flex;
+  margin: 0 auto;
+}
+.dashboard table td .green{
+  font-size: 20px;
+  color: #16a34a;
+}
+.dashboard table td .red{
+  font-size: 20px;
+  color: #dc2626;
+}
+.dashboard .banner table select:focus {
+  outline: none;
+}
+.dashboard .banner table .value-pending {
+  color: #eab308;
+}
+.dashboard .banner table .value-accepted {
+  color: #16a34a;
+}
+.dashboard .banner table .value-rejected {
+  color: #dc2626;
+}
+.dashboard .banner table thead {
+  text-align: justify;
+  padding: 12px 0;
+}
+.dashboard .banner table thead th {
+  padding: 12px 0;
+}
+.dashboard .banner table tbody td {
+  padding: 12px 0;
+}
+@media (max-width: 1376px) {
+  .dashboard .banner:first-child .firstBox .content div,
+  .dashboard .banner:first-child .firstBox .content div p {
+    font-size: 26px;
+  }
+  .dashboard .banner:first-child .firstBox .content p {
+    font-size: 14px;
+  }
+  .dashboard .banner:first-child .secondBox p,
+  .dashboard .banner:first-child .thirdBox p,
+  .dashboard .banner:first-child .secondBox h3,
+  .dashboard .banner:first-child .thirdBox h3 {
+    font-size: 20px;
+  }
+}
+@media (max-width: 1020px) {
+  .dashboard {
+    height: fit-content;
+  }
+  .dashboard .banner:first-child,
+  .dashboard .banner:last-child {
+    flex-wrap: wrap;
+    height: fit-content;
+  }
+  .dashboard .banner:first-child .firstBox {
+    flex: none;
+    width: 100%;
+    height: 265px;
+  }
+  .dashboard .banner:first-child .secondBox,
+  .dashboard .banner:first-child .thirdBox {
+    height: 175px;
+  }
+}
+@media (max-width: 620px) {
+  .dashboard .banner:first-child .secondBox,
+  .dashboard .banner:first-child .thirdBox {
+    width: 100%;
+    flex: none;
+  }
+}
+@media (max-width: 485px) {
+  .dashboard .banner:first-child .firstBox {
+    flex-direction: column;
+    height: fit-content;
+    padding: 20px;
+  }
+  .dashboard .banner:first-child .firstBox img {
+    width: 270px;
+    height: 270px;
+    margin-bottom: 25px;
+  }
+  .dashboard .banner:first-child .firstBox div {
+    justify-content: center;
+  }
+}
+
+.sidebar {
+  position: fixed;
+  width: 120px;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  height: 100%;
+  align-items: center;
+  color: #fff;
+  padding: 70px 0;
+}
+.sidebar svg {
+  width: 50px;
+  height: 50px;
+  font-size: 34px;
+}
+.sidebar svg:hover {
+  background: #fff;
+  color: #3939d9f2;
+  border-radius: 8px;
+  transition: 0.3s;
+  cursor: pointer;
+}
+.sidebar .links {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.wrapper {
+  display: none;
+}
+.wrapper .hamburger {
+  display: none;
+}
+
+@media (max-width: 1208px) {
+  .sidebar {
+    background: #3939d9f2;
+    left: -100%;
+    transition: 0.3s;
+  }
+  .show {
+    left: 0;
+    transition: 0.3s;
+  }
+  .wrapper {
+    display: block;
+    position: fixed;
+    top: 30px;
+    left: 40px;
+    font-size: 34px;
+    background: #3939d9f2;
+    color: #fff;
+    height: 40px;
+    width: 40px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .wrapper .hamburger {
+    display: block;
+  }
+}
+@media (max-width: 485px) {
+  .wrapper {
+    left: 20px;
+  }
+  .show {
+    width: 80px;
+  }
+}
+
+.doctors h1 {
+  color: #3939d9f2;
+  margin-bottom: 30px;
+  font-size: 2.3rem;
+}
+.doctors .banner {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+  grid-gap: 20px;
+}
+.doctors .banner .card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.doctors .banner .card img {
+  width: 270px;
+  height: 270px;
+  border-radius: 100%;
+  margin-bottom: 20px;
+}
+.doctors .banner .card h4 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+}
+.doctors .banner .card div {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 20px;
+}
+.doctors .banner .card div p {
+  font-weight: 700;
+}
+.doctors .banner .card div p span {
+  font-weight: 500;
+}
+
+@media (max-width: 350px) {
+  .doctors .banner {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
+    grid-gap: 20px;
+  }
+}
+
+.messages h1 {
+  color: #3939d9f2;
+  margin-bottom: 30px;
+  font-size: 2.3rem;
+}
+.messages .banner {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.messages .banner .card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+}
+.messages .banner .card div {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 20px;
+}
+.messages .banner .card div p {
+  font-weight: 700;
+}
+.messages .banner .card div p span {
+  font-weight: 500;
+}
+
+.add-doctor-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+  padding: 0;
+}
+.add-doctor-form form {
+  width: 100%;
+}
+.add-doctor-form form .first-wrapper {
+  display: flex;
+  gap: 30px;
+}
+.add-doctor-form form .first-wrapper div:first-child {
+  flex: 1;
+}
+.add-doctor-form form .first-wrapper div:first-child img {
+  width: 100%;
+  height: 515px;
+  margin-bottom: 20px;
+}
+.add-doctor-form form .first-wrapper div:first-child input {
+  width: 100%;
+  padding: 10px;
+}
+.add-doctor-form
+  form
+  .first-wrapper
+  div:first-child
+  input:file-selector-button {
+  position: absolute;
+  width: 100%;
+}
+.add-doctor-form form .first-wrapper div:last-child {
+  flex: 2;
+  display: flex;
+  gap: 30px;
+  flex-direction: column;
+}
+.add-doctor-form form input,
+.add-doctor-form form select,
+.add-doctor-form form textarea {
+  flex: 1;
+  font-size: 24px;
+  padding: 10px 10px 10px 40px;
+  border-radius: 7px;
+  border: 1px solid gray;
+}
+.add-doctor-form button {
+  padding: 10px 35px;
+  color: #fff;
+  font-weight: 700;
+  width: fit-content;
+  border: none;
+  border-radius: 8px;
+  font-size: 24px;
+  margin-bottom: 30px;
+  background: linear-gradient(140deg, #9083d5, #271776ca);
+}
+@media (max-width: 945px) {
+  .add-doctor-form form .first-wrapper {
+    flex-direction: column;
+  }
+  .add-doctor-form form .first-wrapper div:first-child img {
+    height: auto;
+  }
+}
+input[type="date"]:before {
+  content: attr(placeholder);
+  color: #444;
+  margin-right: 0.5em;
+}
+input[type="time"]:before {
+  content: attr(placeholder);
+  color: #444;
+  margin-right: 0.5em;
+}
+                
+                // ======================================================
+                // File: dashboard/src/App.jsx
+                // ======================================================
+
+                import React, { useContext, useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Dashboard from "./components/Dashboard";
+import Login from "./components/Login";
+import AddNewDoctor from "./components/AddNewDoctor";
+import Messages from "./components/Messages";
+import Doctors from "./components/Doctors";
+import { Context } from "./main";
+import axios from "axios";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Sidebar from "./components/Sidebar";
+import AddNewAdmin from "./components/AddNewAdmin";
+import "./App.css";
+
+const App = () => {
+  const { isAuthenticated, setIsAuthenticated, admin, setAdmin } =
+    useContext(Context);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:5000/api/v1/user/admin/me",
+          {
+            withCredentials: true,
+          }
+        );
+        setIsAuthenticated(true);
+        setAdmin(response.data.user);
+      } catch (error) {
+        setIsAuthenticated(false);
+        setAdmin({});
+      }
+    };
+    fetchUser();
+  }, [isAuthenticated]);
+
+  return (
+    <Router>
+      <Sidebar />
+      <Routes>
+        <Route path="/" element={<Dashboard />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/doctor/addnew" element={<AddNewDoctor />} />
+        <Route path="/admin/addnew" element={<AddNewAdmin />} />
+        <Route path="/messages" element={<Messages />} />
+        <Route path="/doctors" element={<Doctors />} />
+      </Routes>
+      <ToastContainer position="top-center" />
+    </Router>
+  );
+};
+
+export default App;
+
+                
+                // ======================================================
+                // File: dashboard/src/components/AddNewAdmin.jsx
+                // ======================================================
+
+                import React, { useContext, useState } from "react";
+import { Context } from "../main";
+import { Navigate, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import axios from "axios";
+
+const AddNewAdmin = () => {
+  const { isAuthenticated, setIsAuthenticated } = useContext(Context);
+
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  // const [nic, setNic] = useState("");
+  const [dob, setDob] = useState("");
+  const [gender, setGender] = useState("");
+  const [password, setPassword] = useState("");
+
+  const navigateTo = useNavigate();
+
+  const handleAddNewAdmin = async (e) => {
+    e.preventDefault();
+    try {
+      await axios
+        .post(
+          "http://localhost:5000/api/v1/user/admin/addnew",
+          { firstName, lastName, email, phone, dob, gender, password },
+          {
+            withCredentials: true,
+            headers: { "Content-Type": "application/json" },
+          }
+        )
+        .then((res) => {
+          toast.success(res.data.message);
+          setIsAuthenticated(true);
+          navigateTo("/");
+          setFirstName("");
+          setLastName("");
+          setEmail("");
+          setPhone("");
+          // setNic("");
+          setDob("");
+          setGender("");
+          setPassword("");
+        });
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
+  };
+
+  if (!isAuthenticated) {
+    return <Navigate to={"/login"} />;
+  }
+
+  return (
+    <section className="page">
+      <section className="container form-component add-admin-form">
+      <img src="/logo.png" alt="logo" className="logo"/>
+        <h1 className="form-title">ADD NEW ADMIN</h1>
+        <form onSubmit={handleAddNewAdmin}>
+          <div>
+            <input
+              type="text"
+              placeholder="First Name"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+            />
+            <input
+              type="text"
+              placeholder="Last Name"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+            />
+          </div>
+          <div>
+            <input
+              type="text"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <input
+              type="number"
+              placeholder="Mobile Number"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+            />
+          </div>
+          <div>
+            {/* <input
+              type="number"
+              placeholder="NIC"
+              value={nic}
+              onChange={(e) => setNic(e.target.value)}
+            /> */}
+            <input
+              type={"date"}
+              placeholder="Date of Birth"
+              value={dob}
+              onChange={(e) => setDob(e.target.value)}
+            />
+          </div>
+          <div>
+            <select value={gender} onChange={(e) => setGender(e.target.value)}>
+              <option value="">Select Gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+          <div style={{ justifyContent: "center", alignItems: "center" }}>
+            <button type="submit">ADD NEW ADMIN</button>
+          </div>
+        </form>
+      </section>
+    </section>
+  );
+};
+
+export default AddNewAdmin;
+
+                
+                // ======================================================
+                // File: dashboard/src/components/AddNewDoctor.jsx
+                // ======================================================
+
+                import React, { useContext, useState } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { Context } from "../main";
+import axios from "axios";
+
+const AddNewDoctor = () => {
+  const { isAuthenticated, setIsAuthenticated } = useContext(Context);
+
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  // const [nic, setNic] = useState("");
+  const [dob, setDob] = useState("");
+  const [gender, setGender] = useState("");
+  const [password, setPassword] = useState("");
+  const [doctorDepartment, setDoctorDepartment] = useState("");
+  const [docAvatar, setDocAvatar] = useState("");
+  const [docAvatarPreview, setDocAvatarPreview] = useState("");
+
+  const navigateTo = useNavigate();
+
+  const departmentsArray = [
+    "Pediatrics",
+    "Orthopedics",
+    "Cardiology",
+    "Neurology",
+    "Oncology",
+    "Radiology",
+    "Physical Therapy",
+    "Dermatology",
+    "ENT",
+  ];
+
+  const handleAvatar = (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      setDocAvatarPreview(reader.result);
+      setDocAvatar(file);
+    };
+  };
+
+  const handleAddNewDoctor = async (e) => {
+    e.preventDefault();
+    try {
+      const formData = new FormData();
+      formData.append("firstName", firstName);
+      formData.append("lastName", lastName);
+      formData.append("email", email);
+      formData.append("phone", phone);
+      formData.append("password", password);
+      // formData.append("nic", nic);
+      formData.append("dob", dob);
+      formData.append("gender", gender);
+      formData.append("doctorDepartment", doctorDepartment);
+      formData.append("docAvatar", docAvatar);
+      await axios
+        .post("http://localhost:5000/api/v1/user/doctor/addnew", formData, {
+          withCredentials: true,
+          headers: { "Content-Type": "multipart/form-data" },
+        })
+        .then((res) => {
+          toast.success(res.data.message);
+          setIsAuthenticated(true);
+          navigateTo("/");
+          setFirstName("");
+          setLastName("");
+          setEmail("");
+          setPhone("");
+          // setNic("");
+          setDob("");
+          setGender("");
+          setPassword("");
+        });
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
+  };
+
+  if (!isAuthenticated) {
+    return <Navigate to={"/login"} />;
+  }
+  return (
+    <section className="page">
+      <section className="container add-doctor-form">
+        <img src="/logo.png" alt="logo" className="logo"/>
+        <h1 className="form-title">REGISTER A NEW DOCTOR</h1>
+        <form onSubmit={handleAddNewDoctor}>
+          <div className="first-wrapper">
+            <div>
+              <img
+                src={
+                  docAvatarPreview ? `${docAvatarPreview}` : "/docHolder.jpg"
+                }
+                alt="Doctor Avatar"
+              />
+              <input type="file" onChange={handleAvatar} />
+            </div>
+            <div>
+              <input
+                type="text"
+                placeholder="First Name"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+              />
+              <input
+                type="text"
+                placeholder="Last Name"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+              />
+              <input
+                type="text"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <input
+                type="number"
+                placeholder="Mobile Number"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+              />
+              {/* <input
+                type="number"
+                placeholder="NIC"
+                value={nic}
+                onChange={(e) => setNic(e.target.value)}
+              /> */}
+              <input
+                type={"date"}
+                placeholder="Date of Birth"
+                value={dob}
+                onChange={(e) => setDob(e.target.value)}
+              />
+              <select
+                value={gender}
+                onChange={(e) => setGender(e.target.value)}
+              >
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+              <input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <select
+                value={doctorDepartment}
+                onChange={(e) => {
+                  setDoctorDepartment(e.target.value);
+                }}
+              >
+                <option value="">Select Department</option>
+                {departmentsArray.map((depart, index) => {
+                  return (
+                    <option value={depart} key={index}>
+                      {depart}
+                    </option>
+                  );
+                })}
+              </select>
+              <button type="submit">Register New Doctor</button>
+            </div>
+          </div>
+        </form>
+      </section>
+    </section>
+  );
+};
+
+export default AddNewDoctor;
+
+                
+                // ======================================================
+                // File: dashboard/src/components/Dashboard.jsx
+                // ======================================================
+
+                import React, { useContext, useEffect, useState } from "react";
+import { Context } from "../main";
+import { Navigate } from "react-router-dom";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { GoCheckCircleFill } from "react-icons/go";
+import { AiFillCloseCircle } from "react-icons/ai";
+
+const Dashboard = () => {
+  const [appointments, setAppointments] = useState([]);
+
+  useEffect(() => {
+    const fetchAppointments = async () => {
+      try {
+        const { data } = await axios.get(
+          "http://localhost:5000/api/v1/appointment/getall",
+          { withCredentials: true }
+        );
+        setAppointments(data.appointments);
+      } catch (error) {
+        setAppointments([]);
+      }
+    };
+    fetchAppointments();
+  }, []);
+
+  const handleUpdateStatus = async (appointmentId, status) => {
+    try {
+      const { data } = await axios.put(
+        `http://localhost:5000/api/v1/appointment/update/${appointmentId}`,
+        { status },
+        { withCredentials: true }
+      );
+      setAppointments((prevAppointments) =>
+        prevAppointments.map((appointment) =>
+          appointment._id === appointmentId
+            ? { ...appointment, status }
+            : appointment
+        )
+      );
+      toast.success(data.message);
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
+  };
+
+  const { isAuthenticated, admin } = useContext(Context);
+  if (!isAuthenticated) {
+    return <Navigate to={"/login"} />;
+  }
+
+  return (
+    <>
+      <section className="dashboard page">
+        <div className="banner">
+          <div className="firstBox">
+            <img src="/doc.png" alt="docImg" />
+            <div className="content">
+              <div>
+                <p>Hello ,</p>
+                <h5>
+                  {admin &&
+                    `${admin.firstName} ${admin.lastName}`}{" "}
+                </h5>
+              </div>
+              <p>
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                Facilis, nam molestias. Eaque molestiae ipsam commodi neque.
+                Assumenda repellendus necessitatibus itaque.
+              </p>
+            </div>
+          </div>
+          <div className="secondBox">
+            <p>Total Appointments</p>
+            <h3>1500</h3>
+          </div>
+          <div className="thirdBox">
+            <p>Registered Doctors</p>
+            <h3>10</h3>
+          </div>
+        </div>
+        <div className="banner">
+          <h5>Appointments</h5>
+          <table>
+            <thead>
+              <tr>
+                <th>Patient</th>
+                <th>Date</th>
+                <th>Doctor</th>
+                <th>Department</th>
+                <th>Status</th>
+                <th>Visited</th>
+              </tr>
+            </thead>
+            <tbody>
+              {appointments && appointments.length > 0
+                ? appointments.map((appointment) => (
+                    <tr key={appointment._id}>
+                      <td>{`${appointment.firstName} ${appointment.lastName}`}</td>
+                      <td>{appointment.appointment_date.substring(0, 16)}</td>
+                      <td>{`${appointment.doctor.firstName} ${appointment.doctor.lastName}`}</td>
+                      <td>{appointment.department}</td>
+                      <td>
+                        <select
+                          className={
+                            appointment.status === "Pending"
+                              ? "value-pending"
+                              : appointment.status === "Accepted"
+                              ? "value-accepted"
+                              : "value-rejected"
+                          }
+                          value={appointment.status}
+                          onChange={(e) =>
+                            handleUpdateStatus(appointment._id, e.target.value)
+                          }
+                        >
+                          <option value="Pending" className="value-pending">
+                            Pending
+                          </option>
+                          <option value="Accepted" className="value-accepted">
+                            Accepted
+                          </option>
+                          <option value="Rejected" className="value-rejected">
+                            Rejected
+                          </option>
+                        </select>
+                      </td>
+                      <td>{appointment.hasVisited === true ? <GoCheckCircleFill className="green"/> : <AiFillCloseCircle className="red"/>}</td>
+                    </tr>
+                  ))
+                : "No Appointments Found!"}
+            </tbody>
+          </table>
+
+          {}
+        </div>
+      </section>
+    </>
+  );
+};
+
+export default Dashboard;
+
+                
+                // ======================================================
+                // File: dashboard/src/components/Doctors.jsx
+                // ======================================================
+
+                import axios from "axios";
+import React, { useContext, useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import { Context } from "../main";
+import { Navigate } from "react-router-dom";
+
+const Doctors = () => {
+  const [doctors, setDoctors] = useState([]);
+  const { isAuthenticated } = useContext(Context);
+  useEffect(() => {
+    const fetchDoctors = async () => {
+      try {
+        const { data } = await axios.get(
+          "http://localhost:5000/api/v1/user/doctors",
+          { withCredentials: true }
+        );
+        setDoctors(data.doctors);
+      } catch (error) {
+        toast.error(error.response.data.message);
+      }
+    };
+    fetchDoctors();
+  }, []);
+
+  if (!isAuthenticated) {
+    return <Navigate to={"/login"} />;
+  }
+  return (
+    <section className="page doctors">
+      <h1>DOCTORS</h1>
+      <div className="banner">
+        {doctors && doctors.length > 0 ? (
+          doctors.map((element) => {
+            return (
+              <div className="card">
+                <img
+                  src={element.docAvatar && element.docAvatar.url}
+                  alt="doctor avatar"
+                />
+                <h4>{`${element.firstName} ${element.lastName}`}</h4>
+                <div className="details">
+                  <p>
+                    Email: <span>{element.email}</span>
+                  </p>
+                  <p>
+                    Phone: <span>{element.phone}</span>
+                  </p>
+                  <p>
+                    DOB: <span>{element.dob.substring(0, 10)}</span>
+                  </p>
+                  <p>
+                    Department: <span>{element.doctorDepartment}</span>
+                  </p>
+                  <p>
+                    NIC: <span>{element.nic}</span>
+                  </p>
+                  <p>
+                    Gender: <span>{element.gender}</span>
+                  </p>
+                </div>
+              </div>
+            );
+          })
+        ) : (
+          <h1>No Registered Doctors Found!</h1>
+        )}
+      </div>
+    </section>
+  );
+};
+
+export default Doctors;
+
+                
+                // ======================================================
+                // File: dashboard/src/components/Login.jsx
+                // ======================================================
+
+                import React, { useContext, useState } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { Context } from "../main";
+import axios from "axios";
+
+const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  const { isAuthenticated, setIsAuthenticated } = useContext(Context);
+
+  const navigateTo = useNavigate();
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      await axios
+        .post(
+          "http://localhost:5000/api/v1/user/login",
+          { email, password, confirmPassword, role: "Admin" },
+          {
+            withCredentials: true,
+            headers: { "Content-Type": "application/json" },
+          }
+        )
+        .then((res) => {
+          toast.success(res.data.message);
+          setIsAuthenticated(true);
+          navigateTo("/");
+          setEmail("");
+          setPassword("");
+          setConfirmPassword("");
+        });
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
+  };
+
+  if (isAuthenticated) {
+    return <Navigate to={"/"} />;
+  }
+
+  return (
+    <>
+      <section className="container form-component">
+        <img src="/logo.png" alt="logo" className="logo" />
+        <h1 className="form-title">WELCOME TO ZEECARE</h1>
+        <p>Only Admins Are Allowed To Access These Resources!</p>
+        <form onSubmit={handleLogin}>
+          <input
+            type="text"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <input
+            type="password"
+            placeholder="Confirm Password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
+          <div style={{ justifyContent: "center", alignItems: "center" }}>
+            <button type="submit">Login</button>
+          </div>
+        </form>
+      </section>
+    </>
+  );
+};
+
+export default Login;
+
+                
+                // ======================================================
+                // File: dashboard/src/components/Messages.jsx
+                // ======================================================
+
+                import axios from "axios";
+import React, { useContext, useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import { Context } from "../main";
+import { Navigate } from "react-router-dom";
+
+const Messages = () => {
+  const [messages, setMessages] = useState([]);
+  const { isAuthenticated } = useContext(Context);
+  useEffect(() => {
+    const fetchMessages = async () => {
+      try {
+        const { data } = await axios.get(
+          "http://localhost:5000/api/v1/message/getall",
+          { withCredentials: true }
+        );
+        setMessages(data.messages);
+      } catch (error) {
+        console.log(error.response.data.message);
+      }
+    };
+    fetchMessages();
+  }, []);
+
+  if (!isAuthenticated) {
+    return <Navigate to={"/login"} />;
+  }
+
+  return (
+    <section className="page messages">
+      <h1>MESSAGE</h1>
+      <div className="banner">
+        {messages && messages.length > 0 ? (
+          messages.map((element) => {
+            return (
+              <div className="card" key={element._id}>
+                <div className="details">
+                  <p>
+                    First Name: <span>{element.firstName}</span>
+                  </p>
+                  <p>
+                    Last Name: <span>{element.lastName}</span>
+                  </p>
+                  <p>
+                    Email: <span>{element.email}</span>
+                  </p>
+                  <p>
+                    Phone: <span>{element.phone}</span>
+                  </p>
+                  <p>
+                    Message: <span>{element.message}</span>
+                  </p>
+                </div>
+              </div>
+            );
+          })
+        ) : (
+          <h1>No Messages!</h1>
+        )}
+      </div>
+    </section>
+  );
+};
+
+export default Messages;
+
+                
+                // ======================================================
+                // File: dashboard/src/components/Sidebar.jsx
+                // ======================================================
+
+                import React, { useContext, useState } from "react";
+import { TiHome } from "react-icons/ti";
+import { RiLogoutBoxFill } from "react-icons/ri";
+import { AiFillMessage } from "react-icons/ai";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { FaUserDoctor } from "react-icons/fa6";
+import { MdAddModerator } from "react-icons/md";
+import { IoPersonAddSharp } from "react-icons/io5";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { Context } from "../main";
+import { useNavigate } from "react-router-dom";
+
+const Sidebar = () => {
+  const [show, setShow] = useState(false);
+
+  const { isAuthenticated, setIsAuthenticated } = useContext(Context);
+
+  const handleLogout = async () => {
+    await axios
+      .get("http://localhost:5000/api/v1/user/admin/logout", {
+        withCredentials: true,
+      })
+      .then((res) => {
+        toast.success(res.data.message);
+        setIsAuthenticated(false);
+      })
+      .catch((err) => {
+        toast.error(err.response.data.message);
+      });
+  };
+
+  const navigateTo = useNavigate();
+
+  const gotoHomePage = () => {
+    navigateTo("/");
+    setShow(!show);
+  };
+  const gotoDoctorsPage = () => {
+    navigateTo("/doctors");
+    setShow(!show);
+  };
+  const gotoMessagesPage = () => {
+    navigateTo("/messages");
+    setShow(!show);
+  };
+  const gotoAddNewDoctor = () => {
+    navigateTo("/doctor/addnew");
+    setShow(!show);
+  };
+  const gotoAddNewAdmin = () => {
+    navigateTo("/admin/addnew");
+    setShow(!show);
+  };
+
+  return (
+    <>
+      <nav
+        style={!isAuthenticated ? { display: "none" } : { display: "flex" }}
+        className={show ? "show sidebar" : "sidebar"}
+      >
+        <div className="links">
+          <TiHome onClick={gotoHomePage} />
+          <FaUserDoctor onClick={gotoDoctorsPage} />
+          <MdAddModerator onClick={gotoAddNewAdmin} />
+          <IoPersonAddSharp onClick={gotoAddNewDoctor} />
+          <AiFillMessage onClick={gotoMessagesPage} />
+          <RiLogoutBoxFill onClick={handleLogout} />
+        </div>
+      </nav>
+      <div
+        className="wrapper"
+        style={!isAuthenticated ? { display: "none" } : { display: "flex" }}
+      >
+        <GiHamburgerMenu className="hamburger" onClick={() => setShow(!show)} />
+      </div>
+    </>
+  );
+};
+
+export default Sidebar;
+
+                
+                // ======================================================
+                // File: dashboard/src/main.jsx
+                // ======================================================
+
+                import React, { createContext, useState } from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App.jsx";
+
+export const Context = createContext({ isAuthenticated: false });
+
+const AppWrapper = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [admin, setAdmin] = useState({});
+
+  return (
+    <Context.Provider
+      value={{ isAuthenticated, setIsAuthenticated, admin, setAdmin }}
+    >
+      <App />
+    </Context.Provider>
+  );
+};
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <AppWrapper />
+  </React.StrictMode>
+);
+
+                
+                // ======================================================
+                // File: frontend/index.html
+                // ======================================================
+
+                <!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hospital Management</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
+
+                
+                // ======================================================
+                // File: frontend/src/App.css
+                // ======================================================
+
+                @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  font-family: "Montserrat", sans-serif;
+}
+body {
+  background: #e5e5e5;
+}
+.btn {
+  padding: 7px 20px;
+  border-radius: 12px;
+  border: none;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+.white-btn {
+  background: #fff;
+  color: #111;
+}
+.purple-btn {
+  background: #9083d5;
+  color: #fff;
+}
+p,
+span,
+a {
+  font-size: 20px;
+}
+h1 {
+  font-size: 36px;
+  font-weight: 900;
+}
+h1 {
+  font-size: 36px;
+  font-weight: 900;
+}
+h2 {
+  font-size: 32px;
+  font-weight: 900;
+}
+h3 {
+  font-size: 28px;
+  font-weight: 900;
+}
+h4 {
+  font-size: 24px;
+  font-weight: 900;
+}
+h5,
+h6 {
+  font-size: 24px;
+  font-weight: 700;
+}
+@media (max-width: 1186px) {
+  h1 {
+    font-size: 32px;
+    font-weight: 900;
+  }
+  h2 {
+    font-size: 30px;
+    font-weight: 900;
+  }
+}
+.container {
+  padding: 0 100px;
+}
+@media (max-width: 700px) {
+  .container {
+    padding: 0 20px;
+  }
+}
+.hero {
+  display: flex;
+  gap: 50px;
+  padding-top: 120px;
+  padding-bottom: 120px;
+  position: relative;
+}
+.hero .banner {
+  flex: 1;
+}
+.hero .banner h1,
+.hero .banner p {
+  max-width: 650px;
+}
+.hero .banner h1 {
+  letter-spacing: 2px;
+  word-spacing: 5px;
+  font-size: 40px;
+}
+.hero .banner p {
+  color: #111;
+  letter-spacing: 2px;
+}
+.hero .banner span {
+  position: absolute;
+  right: -300px;
+  top: -200px;
+  z-index: -1;
+}
+.hero .banner:first-child {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 50px;
+}
+.hero .banner:last-child {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-y: hidden;
+}
+.animated-image {
+  animation: moveUpDown 1s infinite alternate ease-in-out;
+}
+
+@keyframes moveUpDown {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(20px);
+  }
+}
+@media (max-width: 1186px) {
+  .hero .banner span {
+    right: -400px;
+  }
+  .hero .banner h1 {
+    font-size: 32px;
+  }
+}
+@media (max-width: 1085px) {
+  .hero .banner span {
+    right: -480px;
+    top: -315px;
+  }
+}
+@media (max-width: 925px) {
+  .hero {
+    flex-direction: column;
+  }
+  @media (max-width: 700px) {
+    .hero {
+      padding-bottom: 40px;
+    }
+  }
+}
+.form-component {
+  padding-top: 40px;
+  padding-bottom: 60px;
+}
+.form-component h2 {
+  color: gray;
+  letter-spacing: 4px;
+  margin-bottom: 30px;
+}
+.form-component h4 {
+  color: gray;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+.form-component p {
+  max-width: 750px;
+  color: gray;
+  margin-bottom: 20px;
+}
+.form-component form {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.form-component form div {
+  display: flex;
+  gap: 30px;
+}
+.form-component form input,
+.form-component form select,
+.form-component form textarea {
+  flex: 1;
+  font-size: 24px;
+  padding: 10px 10px 10px 40px;
+  border-radius: 7px;
+  border: 1px solid gray;
+}
+.form-component button {
+  padding: 10px 35px;
+  color: #fff;
+  font-weight: 700;
+  width: fit-content;
+  border: none;
+  border-radius: 8px;
+  font-size: 24px;
+  margin-bottom: 30px;
+  background: linear-gradient(140deg, #9083d5, #271776ca);
+}
+.form-component .wrapper {
+  display: flex;
+  gap: 50px;
+}
+.form-component .wrapper .banner {
+  flex: 1;
+}
+.form-component .wrapper .banner:last-child {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.form-component .wrapper .banner:last-child img {
+  max-width: 450px;
+}
+.login-form {
+  margin: 100px auto 20px auto;
+  max-width: 800px;
+  text-align: center;
+}
+.register-form {
+  max-width: 1200px;
+  margin: 100px auto 20px auto;
+}
+.login-form h2 {
+  color: #000;
+}
+.register-form h2 {
+  color: #000;
+}
+@media (max-width: 1110px) {
+  .appointment-form form div:nth-child(4) {
+    flex-direction: column;
+  }
+  .appointment-form form div:nth-child(5) {
+    flex-direction: column;
+  }
+}
+@media (max-width: 888px) {
+  .form-component {
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+  .form-component form div {
+    flex-direction: column;
+  }
+}
+@media (max-width: 667px) {
+  .form-component form input,
+  .form-component form select,
+  .form-component form textarea {
+    font-size: 20px;
+    padding: 10px;
+  }
+}
+.biography {
+  display: flex;
+  gap: 50px;
+  padding-top: 40px;
+  padding-bottom: 60px;
+}
+.biography .banner:first-child {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.biography .banner:last-child {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.biography .banner h3 {
+  font-weight: 700;
+  letter-spacing: 3px;
+}
+.biography .banner p:first-child {
+  font-size: 24px;
+  letter-spacing: 2px;
+}
+@media (max-width: 925px) {
+  .biography {
+    flex-direction: column-reverse;
+  }
+}
+.message-form {
+  position: relative;
+}
+.message-form h2 {
+  text-align: center;
+  color: #000;
+  position: relative;
+}
+.message-form img {
+  position: absolute;
+  top: 0;
+  right: -16%;
+  height: 600px;
+  z-index: -1;
+}
+@media (max-width: 700px) {
+  .message-form img {
+    right: -35%;
+    height: 450px;
+    top: 10%;
+  }
+}
+footer {
+  padding-bottom: 30px !important;
+}
+footer hr {
+  margin-bottom: 30px;
+}
+footer .content {
+  display: flex;
+  gap: 20px;
+}
+footer .content div {
+  flex: 1;
+}
+footer .content div:nth-child(3) {
+  flex: 2;
+}
+footer .content div h4 {
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+footer .content div ul {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+footer .content div ul a {
+  color: gray;
+  text-decoration: none;
+}
+footer .content div ul a:hover {
+  color: #8570ed;
+  transition: 0.3s;
+}
+footer .content div ul li span {
+  color: gray;
+}
+footer .content div ul li span:first-child {
+  width: 150px;
+  display: inline-block;
+}
+
+footer .content div:last-child div {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+footer .content div:last-child div svg {
+  font-size: 24px;
+}
+@media (max-width: 1135px) {
+  footer .content {
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  footer .content div,
+  footer .content div:nth-child(3) {
+    flex: none;
+    width: 340px;
+    margin-bottom: 30px;
+  }
+}
+@media (max-width: 900px) {
+  footer {
+    padding-bottom: 0 !important;
+  }
+  footer .content div,
+  footer .content div:nth-child(3) {
+    width: 100%;
+  }
+}
+@media (max-width: 390px) {
+  footer .content div:nth-child(3) ul li {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.departments {
+  padding-top: 30px;
+  padding-bottom: 50px;
+}
+.departments h2 {
+  color: gray;
+  margin-bottom: 30px;
+}
+.card {
+  position: relative;
+  border-radius: 8px;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding-bottom: 15px;
+  padding-left: 10px;
+  padding-right: 20px;
+  min-height: 360px;
+  margin: 0 10px;
+  text-decoration: none;
+}
+.card img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  top: 0;
+  left: 0;
+}
+.card .depart-name {
+  margin-bottom: 30px;
+  background: #e5e5e5;
+  width: 320px;
+  font-size: 24px;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  padding: 12px;
+  border-radius: 30px;
+  left: 0;
+  height: fit-content;
+  font-weight: 700;
+}
+
+/**********************************************************************************************************************/
+nav {
+  display: flex;
+  width: 100%;
+  margin: 0 auto;
+  justify-content: space-between;
+  position: absolute;
+  align-items: center;
+  border-bottom-right-radius: 7px;
+  border-bottom-left-radius: 7px;
+  padding-top: 20px !important;
+  padding-bottom: 20px !important;
+  z-index: 2;
+}
+nav .logo {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  font-size: 2rem;
+}
+nav .navLinks {
+  flex: 2;
+}
+nav .navLinks {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+nav .navLinks .links {
+  display: flex;
+  gap: 25px;
+}
+nav .navLinks .links a {
+  text-decoration: none;
+  color: #222;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 1.4px;
+}
+nav .navLinks .links a:hover {
+  color: #000;
+  transition: 0.3s;
+  cursor: pointer;
+}
+nav .btn {
+  padding: 8px 20px;
+  color: #e5e5e5;
+  background: transparent;
+  border: none;
+  border-radius: 20px;
+  font-size: 20px;
+  font-weight: 600;
+  z-index: 2;
+}
+nav .logoutBtn {
+  background: linear-gradient(135deg, black, rgb(49, 49, 49));
+}
+nav .loginBtn {
+  background: linear-gradient(135deg, black, rgb(49, 49, 49));
+}
+nav .hamburger {
+  display: none;
+}
+nav svg {
+  font-size: 1.75rem;
+}
+@media (max-width: 1520px) {
+  nav {
+    min-width: 100%;
+    padding: 25px 20px 40px 20px;
+  }
+}
+@media (max-width: 1100px) {
+  nav {
+    background: #ffffffbf;
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+  nav .hamburger {
+    display: flex;
+  }
+  nav .navLinks {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 15px 7.5px;
+    z-index: 2;
+    transition: 0.3s;
+    position: fixed;
+    left: 0;
+    height: 100%;
+    width: 400px;
+    background: #ffffffbf;
+    top: 79px;
+  }
+  nav .showmenu {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 15px 7.5px;
+    z-index: 2;
+    transition: 0.3s;
+    position: fixed;
+    left: -100%;
+    width: 400px;
+    height: 100%;
+    background: #ffffffbf;
+    top: 79px;
+  }
+  nav .navLinks .links {
+    flex-direction: column;
+    text-align: center;
+  }
+  nav .navLinks .links a {
+    font-weight: 700;
+  }
+  nav .logoutBtn {
+    margin-top: 20px;
+  }
+}
+@media (max-width: 800px) {
+  nav .showmenu {
+    width: 96vw;
+  }
+}
+@media (max-width: 650px) {
+  nav .showmenu {
+    margin: 0;
+    width: 100%;
+    border-radius: 0;
+  }
+}
+@media (max-width: 555px) {
+  nav {
+    background: #fff;
+  }
+  nav .navLinks {
+    background: #fff;
+    width: 100%;
+  }
+}
+
+input[type="date"]:before {
+  content: attr(placeholder);
+  color: #444;
+  margin-right: 0.5em;
+}
+input[type="time"]:before {
+  content: attr(placeholder);
+  color: #444;
+  margin-right: 0.5em;
+}
+.logo-img{
+  width: 150px;
+}
+footer .logo-img{
+  width: 100%;
+}
+                
+                // ======================================================
+                // File: frontend/src/App.jsx
+                // ======================================================
+
+                import React, { useContext, useEffect } from "react";
+import "./App.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./Pages/Home";
+import Appointment from "./Pages/Appointment";
+import AboutUs from "./Pages/AboutUs";
+import Register from "./Pages/Register";
+import Footer from "./components/Footer";
+import Navbar from "./components/Navbar";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
+import { Context } from "./main";
+import Login from "./Pages/Login";
+const App = () => {
+  const { isAuthenticated, setIsAuthenticated, setUser } =
+    useContext(Context);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:5000/api/v1/user/patient/me",
+          {
+            withCredentials: true,
+          }
+        );
+        setIsAuthenticated(true);
+        setUser(response.data.user);
+      } catch (error) {
+        setIsAuthenticated(false);
+        setUser({});
+      }
+    };
+    fetchUser();
+  }, [isAuthenticated]);
+
+  return (
+    <>
+      <Router>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/appointment" element={<Appointment />} />
+          <Route path="/about" element={<AboutUs />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
+        <Footer />
+        <ToastContainer position="top-center" />
+      </Router>
+    </>
+  );
+};
+
+export default App;
+
+                
+                // ======================================================
+                // File: frontend/src/Pages/AboutUs.jsx
+                // ======================================================
+
+                import React from "react";
+import Hero from "../components/Hero";
+import Biography from "../components/Biography";
+const AboutUs = () => {
+  return (
+    <>
+      <Hero
+        title={"Learn More About Us | ZeeCare Medical Institute"}
+        imageUrl={"/about.png"}
+      />
+      <Biography imageUrl={"/whoweare.png"} />
+    </>
+  );
+};
+
+export default AboutUs;
+
+                
+                // ======================================================
+                // File: frontend/src/Pages/Appointment.jsx
+                // ======================================================
+
+                import React from "react";
+import Hero from "../components/Hero";
+import AppointmentForm from "../components/AppointmentForm";
+
+const Appointment = () => {
+  return (
+    <>
+      <Hero
+        title={"Schedule Your Appointment | ZeeCare Medical Institute"}
+        imageUrl={"/signin.png"}
+      />
+      <AppointmentForm/>
+    </>
+  );
+};
+
+export default Appointment;
+
+                
+                // ======================================================
+                // File: frontend/src/Pages/Home.jsx
+                // ======================================================
+
+                import React, { useContext } from "react";
+import Hero from "../components/Hero";
+import Biography from "../components/Biography";
+import MessageForm from "../components/MessageForm";
+import Departments from "../components/Departments";
+
+const Home = () => {
+  return (
+    <>
+      <Hero
+        title={
+          "Welcome to ZeeCare Medical Institute | Your Trusted Healthcare Provider"
+        }
+        imageUrl={"/hero.png"}
+      />
+      <Biography imageUrl={"/about.png"} />
+      <Departments />
+      <MessageForm />
+    </>
+  );
+};
+
+export default Home;
+
+                
+                // ======================================================
+                // File: frontend/src/Pages/Login.jsx
+                // ======================================================
+
+                import axios from "axios";
+import React, { useContext, useState } from "react";
+import { toast } from "react-toastify";
+import { Context } from "../main";
+import { Link, useNavigate, Navigate } from "react-router-dom";
+
+const Login = () => {
+  const { isAuthenticated, setIsAuthenticated } = useContext(Context);
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  const navigateTo = useNavigate();
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      await axios
+        .post(
+          "http://localhost:5000/api/v1/user/login",
+          { email, password, confirmPassword, role: "Patient" },
+          {
+            withCredentials: true,
+            headers: { "Content-Type": "application/json" },
+          }
+        )
+        .then((res) => {
+          toast.success(res.data.message);
+          setIsAuthenticated(true);
+          navigateTo("/");
+          setEmail("");
+          setPassword("");
+          setConfirmPassword("");
+        });
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
+  };
+
+  if (isAuthenticated) {
+    return <Navigate to={"/"} />;
+  }
+
+  return (
+    <>
+      <div className="container form-component login-form">
+        <h2>Sign In</h2>
+        <p>Please Login To Continue</p>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat culpa
+          voluptas expedita itaque ex, totam ad quod error?
+        </p>
+        <form onSubmit={handleLogin}>
+          <input
+            type="text"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <input
+            type="password"
+            placeholder="Confirm Password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
+          <div
+            style={{
+              gap: "10px",
+              justifyContent: "flex-end",
+              flexDirection: "row",
+            }}
+          >
+            <p style={{ marginBottom: 0 }}>Not Registered?</p>
+            <Link
+              to={"/register"}
+              style={{ textDecoration: "none", color: "#271776ca" }}
+            >
+              Register Now
+            </Link>
+          </div>
+          <div style={{ justifyContent: "center", alignItems: "center" }}>
+            <button type="submit">Login</button>
+          </div>
+        </form>
+      </div>
+    </>
+  );
+};
+
+export default Login;
+
+                
+                // ======================================================
+                // File: frontend/src/Pages/Register.jsx
+                // ======================================================
+
+                import axios from "axios";
+import React, { useContext, useState } from "react";
+import { toast } from "react-toastify";
+import { Context } from "../main";
+import { Link, Navigate, useNavigate } from "react-router-dom";
+
+const Register = () => {
+  const { isAuthenticated, setIsAuthenticated } = useContext(Context);
+
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  // const [nic, setNic] = useState("");
+  const [dob, setDob] = useState("");
+  const [gender, setGender] = useState("");
+  const [password, setPassword] = useState("");
+
+  const navigateTo = useNavigate();
+
+  const handleRegistration = async (e) => {
+    e.preventDefault();
+    try {
+      await axios
+        .post(
+          "http://localhost:5000/api/v1/user/patient/register",
+          { firstName, lastName, email, phone, dob, gender, password },
+          {
+            withCredentials: true,
+            headers: { "Content-Type": "application/json" },
+          }
+        )
+        .then((res) => {
+          toast.success(res.data.message);
+          setIsAuthenticated(true);
+          navigateTo("/");
+          setFirstName("");
+          setLastName("");
+          setEmail("");
+          setPhone("");
+          // setNic("");
+          setDob("");
+          setGender("");
+          setPassword("");
+        });
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
+  };
+
+  if (isAuthenticated) {
+    return <Navigate to={"/"} />;
+  }
+
+  return (
+    <>
+      <div className="container form-component register-form">
+        <h2>Sign Up</h2>
+        <p>Please Sign Up To Continue</p>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat culpa
+          voluptas expedita itaque ex, totam ad quod error?
+        </p>
+        <form onSubmit={handleRegistration}>
+          <div>
+            <input
+              type="text"
+              placeholder="First Name"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+            />
+            <input
+              type="text"
+              placeholder="Last Name"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+            />
+          </div>
+          <div>
+            <input
+              type="text"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <input
+              type="number"
+              placeholder="Mobile Number"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+            />
+          </div>
+          <div>
+            {/* <input
+              type="number"
+              placeholder="NIC"
+              value={nic}
+              onChange={(e) => setNic(e.target.value)}
+            /> */}
+            <input
+              type={"date"}
+              placeholder="Date of Birth"
+              value={dob}
+              onChange={(e) => setDob(e.target.value)}
+            />
+          </div>
+          <div>
+            <select value={gender} onChange={(e) => setGender(e.target.value)}>
+              <option value="">Select Gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+          <div
+            style={{
+              gap: "10px",
+              justifyContent: "flex-end",
+              flexDirection: "row",
+            }}
+          >
+            <p style={{ marginBottom: 0 }}>Already Registered?</p>
+            <Link
+              to={"/signin"}
+              style={{ textDecoration: "none", color: "#271776ca" }}
+            >
+              Login Now
+            </Link>
+          </div>
+          <div style={{ justifyContent: "center", alignItems: "center" }}>
+            <button type="submit">Register</button>
+          </div>
+        </form>
+      </div>
+    </>
+  );
+};
+
+export default Register;
+
+                
+                // ======================================================
+                // File: frontend/src/components/AppointmentForm.jsx
+                // ======================================================
+
+                import axios from "axios";
+import React, { useEffect } from "react";
+import { useState } from "react";
+import { toast } from "react-toastify";
+
+const AppointmentForm = () => {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [nic, setNic] = useState("");
+  const [dob, setDob] = useState("");
+  const [gender, setGender] = useState("");
+  const [appointmentDate, setAppointmentDate] = useState("");
+  const [department, setDepartment] = useState("Pediatrics");
+  const [doctorFirstName, setDoctorFirstName] = useState("");
+  const [doctorLastName, setDoctorLastName] = useState("");
+  const [address, setAddress] = useState("");
+  const [hasVisited, setHasVisited] = useState(false);
+
+  const departmentsArray = [
+    "Pediatrics",
+    "Orthopedics",
+    "Cardiology",
+    "Neurology",
+    "Oncology",
+    "Radiology",
+    "Physical Therapy",
+    "Dermatology",
+    "ENT",
+  ];
+
+  const [doctors, setDoctors] = useState([]);
+  useEffect(() => {
+    const fetchDoctors = async () => {
+      const { data } = await axios.get(
+        "http://localhost:5000/api/v1/user/doctors",
+        { withCredentials: true }
+      );
+      setDoctors(data.doctors);
+      console.log(data.doctors);
+    };
+    fetchDoctors();
+  }, []);
+  const handleAppointment = async (e) => {
+    e.preventDefault();
+    try {
+      const hasVisitedBool = Boolean(hasVisited);
+      const { data } = await axios.post(
+        "http://localhost:5000/api/v1/appointment/post",
+        {
+          firstName,
+          lastName,
+          email,
+          phone,
+          nic,
+          dob,
+          gender,
+          appointment_date: appointmentDate,
+          department,
+          doctor_firstName: doctorFirstName,
+          doctor_lastName: doctorLastName,
+          hasVisited: hasVisitedBool,
+          address,
+        },
+        {
+          withCredentials: true,
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+      toast.success(data.message);
+      setFirstName(""),
+        setLastName(""),
+        setEmail(""),
+        setPhone(""),
+        setNic(""),
+        setDob(""),
+        setGender(""),
+        setAppointmentDate(""),
+        setDepartment(""),
+        setDoctorFirstName(""),
+        setDoctorLastName(""),
+        setHasVisited(""),
+        setAddress("");
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
+  };
+
+  return (
+    <>
+      <div className="container form-component appointment-form">
+        <h2>Appointment</h2>
+        <form onSubmit={handleAppointment}>
+          <div>
+            <input
+              type="text"
+              placeholder="First Name"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+            />
+            <input
+              type="text"
+              placeholder="Last Name"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+            />
+          </div>
+          <div>
+            <input
+              type="text"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <input
+              type="number"
+              placeholder="Mobile Number"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+            />
+          </div>
+          <div>
+            <input
+              type="number"
+              placeholder="NIC"
+              value={nic}
+              onChange={(e) => setNic(e.target.value)}
+            />
+            <input
+              type="date"
+              placeholder="Date of Birth"
+              value={dob}
+              onChange={(e) => setDob(e.target.value)}
+            />
+          </div>
+          <div>
+            <select value={gender} onChange={(e) => setGender(e.target.value)}>
+              <option value="">Select Gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
+            <input
+              type="date"
+              placeholder="Appointment Date"
+              value={appointmentDate}
+              onChange={(e) => setAppointmentDate(e.target.value)}
+            />
+          </div>
+          <div>
+            <select
+              value={department}
+              onChange={(e) => {
+                setDepartment(e.target.value);
+                setDoctorFirstName("");
+                setDoctorLastName("");
+              }}
+            >
+              {departmentsArray.map((depart, index) => {
+                return (
+                  <option value={depart} key={index}>
+                    {depart}
+                  </option>
+                );
+              })}
+            </select>
+            <select
+              value={`${doctorFirstName} ${doctorLastName}`}
+              onChange={(e) => {
+                const [firstName, lastName] = e.target.value.split(" ");
+                setDoctorFirstName(firstName);
+                setDoctorLastName(lastName);
+              }}
+              disabled={!department}
+            >
+              <option value="">Select Doctor</option>
+              {doctors
+                .filter((doctor) => doctor.doctorDepartment === department)
+                .map((doctor, index) => (
+                  <option
+                    value={`${doctor.firstName} ${doctor.lastName}`}
+                    key={index}
+                  >
+                    {doctor.firstName} {doctor.lastName}
+                  </option>
+                ))}
+            </select>
+          </div>
+          <textarea
+            rows="10"
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+            placeholder="Address"
+          />
+          <div
+            style={{
+              gap: "10px",
+              justifyContent: "flex-end",
+              flexDirection: "row",
+            }}
+          >
+            <p style={{ marginBottom: 0 }}>Have you visited before?</p>
+            <input
+              type="checkbox"
+              checked={hasVisited}
+              onChange={(e) => setHasVisited(e.target.checked)}
+              style={{ flex: "none", width: "25px" }}
+            />
+          </div>
+          <button style={{ margin: "0 auto" }}>GET APPOINTMENT</button>
+        </form>
+      </div>
+    </>
+  );
+};
+
+export default AppointmentForm;
+
+                
+                // ======================================================
+                // File: frontend/src/components/Biography.jsx
+                // ======================================================
+
+                import React from "react";
+
+const Biography = ({imageUrl}) => {
+  return (
+    <>
+      <div className="container biography">
+        <div className="banner">
+          <img src={imageUrl} alt="whoweare" />
+        </div>
+        <div className="banner">
+          <p>Biography</p>
+          <h3>Who We Are</h3>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus
+            blanditiis sequi aperiam. Debitis fugiat harum ex maxime illo
+            consequatur mollitia voluptatem omnis nihil nesciunt beatae esse
+            ipsam, sapiente totam aspernatur porro ducimus aperiam nisi. Ex
+            magnam voluptatum consectetur reprehenderit fugiat recusandae aut
+            similique illum natus velit, praesentium nostrum nesciunt. Deleniti,
+            nesciunt laboriosam totam iusto!
+          </p>
+          <p>We are all in 2024!</p>
+          <p>We are working on a MERN STACK PROJECT.</p>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores
+            assumenda exercitationem accusamus sit repellendus quo optio dolorum
+            corporis corrupti. Quas similique vel minima veniam tenetur
+            obcaecati atque magni suscipit laboriosam! Veniam vitae minus nihil
+            cupiditate natus provident. Ex illum quasi pariatur odit nisi
+            voluptas illo qui ipsum mollitia. Libero, assumenda?
+          </p>
+          <p>Lorem ipsum dolor sit amet!</p>
+          <p>Coding is fun!</p>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default Biography;
+
+                
+                // ======================================================
+                // File: frontend/src/components/Departments.jsx
+                // ======================================================
+
+                import React from "react";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+
+const Departments = () => {
+  const departmentsArray = [
+    {
+      name: "Pediatrics",
+      imageUrl: "/departments/pedia.jpg",
+    },
+    {
+      name: "Orthopedics",
+      imageUrl: "/departments/ortho.jpg",
+    },
+    {
+      name: "Cardiology",
+      imageUrl: "/departments/cardio.jpg",
+    },
+    {
+      name: "Neurology",
+      imageUrl: "/departments/neuro.jpg",
+    },
+    {
+      name: "Oncology",
+      imageUrl: "/departments/onco.jpg",
+    },
+    {
+      name: "Radiology",
+      imageUrl: "/departments/radio.jpg",
+    },
+    {
+      name: "Physical Therapy",
+      imageUrl: "/departments/therapy.jpg",
+    },
+    {
+      name: "Dermatology",
+      imageUrl: "/departments/derma.jpg",
+    },
+    {
+      name: "ENT",
+      imageUrl: "/departments/ent.jpg",
+    },
+  ];
+
+  const responsive = {
+    extraLarge: {
+      breakpoint: { max: 3000, min: 1324 },
+      items: 4,
+      slidesToSlide: 1, // optional, default to 1.
+    },
+    large: {
+      breakpoint: { max: 1324, min: 1005 },
+      items: 3,
+      slidesToSlide: 1, // optional, default to 1.
+    },
+    medium: {
+      breakpoint: { max: 1005, min: 700 },
+      items: 2,
+      slidesToSlide: 1, // optional, default to 1.
+    },
+    small: {
+      breakpoint: { max: 700, min: 0 },
+      items: 1,
+      slidesToSlide: 1, // optional, default to 1.
+    },
+  };
+
+  return (
+    <>
+      <div className="container departments">
+        <h2>Departments</h2>
+        <Carousel
+          responsive={responsive}
+          removeArrowOnDeviceType={[
+            // "superLargeDesktop",
+            // "desktop",
+            "tablet",
+            "mobile",
+          ]}
+        >
+          {departmentsArray.map((depart, index) => {
+            return (
+              <div key={index} className="card">
+                <div className="depart-name">{depart.name}</div>
+                <img src={depart.imageUrl} alt="Department" />
+              </div>
+            );
+          })}
+        </Carousel>
+      </div>
+    </>
+  );
+};
+
+export default Departments;
+
+                
+                // ======================================================
+                // File: frontend/src/components/Footer.jsx
+                // ======================================================
+
+                import React from "react";
+import { Link } from "react-router-dom";
+import { FaLocationArrow, FaPhone } from "react-icons/fa6";
+import { MdEmail } from "react-icons/md";
+
+const Footer = () => {
+  const hours = [
+    {
+      id: 1,
+      day: "Monday",
+      time: "9:00 AM - 11:00 PM",
+    },
+    {
+      id: 2,
+      day: "Tuesday",
+      time: "12:00 PM - 12:00 AM",
+    },
+    {
+      id: 3,
+      day: "Wednesday",
+      time: "10:00 AM - 10:00 PM",
+    },
+    {
+      id: 4,
+      day: "Thursday",
+      time: "9:00 AM - 9:00 PM",
+    },
+    {
+      id: 5,
+      day: "Monday",
+      time: "3:00 PM - 9:00 PM",
+    },
+    {
+      id: 6,
+      day: "Saturday",
+      time: "9:00 AM - 3:00 PM",
+    },
+  ];
+
+  return (
+    <>
+      <footer className={"container"}>
+        <hr />
+        <div className="content">
+          <div>
+            <img src="/logo.png" alt="logo" className="logo-img"/>
+          </div>
+          <div>
+            <h4>Quick Links</h4>
+            <ul>
+              <Link to={"/"}>Home</Link>
+              <Link to={"/appointment"}>Appointment</Link>
+              <Link to={"/about"}>About</Link>
+            </ul>
+          </div>
+          <div>
+            <h4>Hours</h4>
+            <ul>
+              {hours.map((element) => (
+                <li key={element.id}>
+                  <span>{element.day}</span>
+                  <span>{element.time}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <h4>Contact</h4>
+            <div>
+              <FaPhone />
+              <span>999-999-9999</span>
+            </div>
+            <div>
+              <MdEmail />
+              <span>zeelab@gmail.com</span>
+            </div>
+            <div>
+              <FaLocationArrow />
+              <span>Wankaner, Morbi Macchu 2 infront of sanjari soda</span>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </>
+  );
+};
+
+export default Footer;
+
+                
+                // ======================================================
+                // File: frontend/src/components/Hero.jsx
+                // ======================================================
+
+                import React from "react";
+
+const Hero = ({ title, imageUrl }) => {
+  return (
+    <>
+      <div className="hero container">
+        <div className="banner">
+          <h1>{title}</h1>
+          <p>
+            ZeeCare Medical Institute is a state-of-the-art facility dedicated
+            to providing comprehensive healthcare services with compassion and
+            expertise. Our team of skilled professionals is committed to
+            delivering personalized care tailored to each patient's needs. At
+            ZeeCare, we prioritize your well-being, ensuring a harmonious
+            journey towards optimal health and wellness.
+          </p>
+        </div>
+        <div className="banner">
+          <img src={imageUrl} alt="hero" className="animated-image" />
+          <span>
+            <img src="/Vector.png" alt="vector" />
+          </span>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default Hero;
+
+                
+                // ======================================================
+                // File: frontend/src/components/MessageForm.jsx
+                // ======================================================
+
+                import axios from "axios";
+import React, { useState } from "react";
+import { toast } from "react-toastify";
+
+const MessageForm = () => {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [message, setMessage] = useState("");
+
+  const handleMessage = async (e) => {
+    e.preventDefault();
+    try {
+      await axios
+        .post(
+          "http://localhost:5000/api/v1/message/send",
+          { firstName, lastName, email, phone, message },
+          {
+            withCredentials: true,
+            headers: { "Content-Type": "application/json" },
+          }
+        )
+        .then((res) => {
+          toast.success(res.data.message);
+          setFirstName("");
+          setLastName("");
+          setEmail("");
+          setPhone("");
+          setMessage("");
+        });
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
+  };
+
+  return (
+    <>
+      <div className="container form-component message-form">
+        <h2>Send Us A Message</h2>
+        <form onSubmit={handleMessage}>
+          <div>
+            <input
+              type="text"
+              placeholder="First Name"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+            />
+            <input
+              type="text"
+              placeholder="Last Name"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+            />
+          </div>
+          <div>
+            <input
+              type="text"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <input
+              type="number"
+              placeholder="Mobile Number"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+            />
+          </div>
+          <textarea
+            rows={7}
+            placeholder="Message"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+          />
+          <div style={{ justifyContent: "center", alignItems: "center" }}>
+            <button type="submit">Send</button>
+          </div>
+        </form>
+        <img src="/Vector.png" alt="vector" />
+      </div>
+    </>
+  );
+};
+
+export default MessageForm;
+
+                
+                // ======================================================
+                // File: frontend/src/components/Navbar.jsx
+                // ======================================================
+
+                import React, { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { GiHamburgerMenu } from "react-icons/gi";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { Context } from "../main";
+
+const Navbar = () => {
+  const [show, setShow] = useState(false);
+  const { isAuthenticated, setIsAuthenticated } = useContext(Context);
+
+  const handleLogout = async () => {
+    await axios
+      .get("http://localhost:5000/api/v1/user/patient/logout", {
+        withCredentials: true,
+      })
+      .then((res) => {
+        toast.success(res.data.message);
+        setIsAuthenticated(false);
+      })
+      .catch((err) => {
+        toast.error(err.response.data.message);
+      });
+  };
+
+  const navigateTo = useNavigate();
+
+  const goToLogin = () => {
+    navigateTo("/login");
+  };
+
+  return (
+    <>
+      <nav className={"container"}>
+        <div className="logo">
+          <img src="/logo.png" alt="logo" className="logo-img" />
+        </div>
+        <div className={show ? "navLinks showmenu" : "navLinks"}>
+          <div className="links">
+            <Link to={"/"} onClick={() => setShow(!show)}>
+              Home
+            </Link>
+            <Link to={"/appointment"} onClick={() => setShow(!show)}>
+              Appointment
+            </Link>
+            <Link to={"/about"} onClick={() => setShow(!show)}>
+              About Us
+            </Link>
+          </div>
+          {isAuthenticated ? (
+            <button className="logoutBtn btn" onClick={handleLogout}>
+              LOGOUT
+            </button>
+          ) : (
+            <button className="loginBtn btn" onClick={goToLogin}>
+              LOGIN
+            </button>
+          )}
+        </div>
+        <div className="hamburger" onClick={() => setShow(!show)}>
+          <GiHamburgerMenu />
+        </div>
+      </nav>
+    </>
+  );
+};
+
+export default Navbar;
+
+                
+                // ======================================================
+                // File: frontend/src/main.jsx
+                // ======================================================
+
+                import React, { createContext, useState } from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App.jsx";
+
+export const Context = createContext({
+  isAuthenticated: false,
+});
+
+const AppWrapper = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [user, setUser] = useState({});
+
+  return (
+    <Context.Provider
+      value={{
+        isAuthenticated,
+        setIsAuthenticated,
+        user,
+        setUser,
+      }}
+    >
+      <App />
+    </Context.Provider>
+  );
+};
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <AppWrapper />
+  </React.StrictMode>
+);
+
+                

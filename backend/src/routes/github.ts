@@ -1,7 +1,8 @@
 import express from 'express';
 import {Router, Request, Response} from 'express';
 import { Buffer } from 'buffer';
-import { getRepo, getRepoFiles, getRepoOwner } from '../utils/githubFunction.js';
+import { checkLimit, filterFrontendFiles, getRepo, getRepoFiles, getRepoOwner, printAllFileContent } from '../utils/githubFunction.js';
+import { error } from 'console';
 
 const router: Router = express.Router();
 
@@ -18,36 +19,53 @@ router.get('/',async (req: Request, res:Response)=>{
     }
 });
 
-router.get('/fileNames', async (req: Request, res: Response) => {
+router.get('/getLimit', async(req: Request, res: Response)=>{
+    checkLimit();
+    res.send('All Good My Ninja');
+});
+
+router.get('/printFileContent', async (req: Request, res: Response) => {
     try {
-        const repoUrl = req.query.giturl;
-        console.log(repoUrl);
+        const repoUrl = req.query.giturl; 
         
         if(!repoUrl){
-        return res.status(400).send("Please provide a 'repoUrl' in the request body.");
-        } 
-        //@ts-ignore
-        const filePath = await getRepoFiles(repoUrl);
-        res.type('json').send(filePath);
+            return res.status(400).send("Please provide a 'repoUrl' in the request body.");
+        } //@ts-ignore
+        
+        const {owner, repo} = await getRepoOwner(repoUrl);        
+        const files = await getRepoFiles(owner, repo);
+        const frontendFiles = filterFrontendFiles(files);
+        const printfiles = await printAllFileContent(owner, repo, frontendFiles, 'NiggaBoit.txt');
+
+        if(printfiles){
+            res.send('All good niggers');
+        } else throw error
+        
 
     } catch (error) {
          console.error("Failed to fetch or decode file:", error);
         res.status(500).send("Error fetching file from GitHub.");
     }
-})
+});
 
-router.post('/extractRepo',async (req: Request, res:Response)=>{
-    const repoUrl = req.query.giturl;
-    if(!repoUrl){
-        return res.status(400).send("Please provide a 'repoUrl' in the request body.");
-    }
+router.get('/fileNames', async (req: Request, res: Response) => {
     try {
-        //@ts-ignore
-        const {owner, repo} = getRepoOwner(repoUrl)
+        const repoUrl = req.query.giturl;
+        
+        if(!repoUrl){
+        return res.status(400).send("Please provide a 'repoUrl' in the request body.");
+        } //@ts-ignore
+        const {owner, repo}= getRepoOwner(repoUrl);
+        const files = await getRepoFiles(owner, repo);
+        const frontendFiles = filterFrontendFiles(files);
+        res.type('json').send(frontendFiles);
+
     } catch (error) {
-        console.error("Failed to fetch or decode file:", error);
+         console.error("Failed to fetch or decode file:", error);
         res.status(500).send("Error fetching file from GitHub.");
     }
 });
+
+
 
 export default router;

@@ -2,6 +2,7 @@ import express, { Request, Response } from 'express';
 import simpleLogger from './utils/logger.js';
 import { toNodeHandler } from 'better-auth/node';
 import githubRouter from './routes/github.js';
+import codeFilesRouter from './routes/codefiles.js';
 // import {auth} from "./utils/auth";
 
 const app = express();
@@ -15,6 +16,8 @@ app.use(express.json());
 app.use(simpleLogger());
 
 app.use('/github', githubRouter);
+app.use('/codeFiles', codeFilesRouter);
+
 
 app.get('/', (req: Request, res: Response) => {
     res.status(200).json({ message: "Baapu says Hi, All things Kadak" });
