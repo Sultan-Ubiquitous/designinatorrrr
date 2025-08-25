@@ -29,8 +29,13 @@ export async function getRepo(OWNER: string, REPO: string, PATH: string){
      return response;
 }
 
+interface RepoFile {
+  path: string;
+  content: string;
+  type: string;
+}
 
-export function filterFrontendFiles(allFilesPaths: string[]): string[] {
+export async function filterFrontendFiles(owner: string, repo: string, allFilesPaths: string[]): Promise<RepoFile[]> {
     const frontendExtensions = [
         '.html', '.css', '.scss', '.less', '.sass', 
         '.jsx', '.tsx', '.vue', '.svelte',          
@@ -67,8 +72,8 @@ export function filterFrontendFiles(allFilesPaths: string[]): string[] {
         '.mp3', '.wav', '.ogg',                                          
         '.woff', '.woff2', '.ttf', '.eot', '.otf',                       
     ];
-
-    const frontendFiles = allFilesPaths.filter(path => {
+    
+    const filteredFrontendFilePaths = allFilesPaths.filter(path => {
         const lowerCasePath = path.toLowerCase();
 
         if(exclusionPatterns.some(pattern => lowerCasePath.includes(pattern))){
@@ -90,7 +95,25 @@ export function filterFrontendFiles(allFilesPaths: string[]): string[] {
         return false;
     })
 
-    return frontendFiles;
+    const result: RepoFile[] = [];
+    for(const path of filteredFrontendFilePaths) {
+        const {data: fileData} = await octokit.rest.repos.getContent({
+            owner,
+            repo,
+            path,
+        });
+
+        if('content' in fileData && fileData.type === 'file') {
+            const content = Buffer.from(fileData.content, 'base64').toString('utf-8');
+            result.push({
+                path,
+                content,
+                type: path.split('.').pop() || 'unknown',
+            });
+        }
+    }
+
+    return result;
 }
 
 export async function getRepoFiles(owner: string, repo: string){

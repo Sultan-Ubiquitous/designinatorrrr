@@ -3,37 +3,45 @@ import { useState } from "react";
 
 export default function Page() {
   const [projectName, setProjectName] = useState("");
-  const [projectFile, setProjectFile] = useState<File | null>(null);
+  const [githubUrl, setGithubUrl] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!projectName || !projectFile) {
-      setMessage("Please fill in all fields.");
+    if (!projectName || !githubUrl) {
+      setMessage("Please provide both Project Name and GitHub URL.");
       return;
     }
-
-    const formData = new FormData();
-    formData.append("projectName", projectName);
-    formData.append("projectFile", projectFile);
 
     setLoading(true);
     setMessage("");
 
     try {
-      const res = await fetch("http://localhost:8000/codefiles/create_project", {
+      const res = await fetch("http://localhost:8008/codefiles/sendFiles", {
         method: "POST",
-        body: formData,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          projectName,
+          gitUrl: githubUrl,
+        }),
+        // FIX: Added 'credentials: include' to send session cookies 
+        // with the request for authorization.
+        credentials: "include",
       });
 
       if (res.ok) {
         setMessage("Project created successfully!");
+        setProjectName("");
+        setGithubUrl("");
       } else {
-        const error = await res.text();
-        setMessage(`Error: ${error}`);
+        const errorData = await res.json();
+        setMessage(`Error: ${errorData.error || 'Something went wrong'}`);
       }
     } catch (err) {
+      console.log(err);
       setMessage("Failed to connect to server.");
     } finally {
       setLoading(false);
@@ -47,7 +55,7 @@ export default function Page() {
         className="bg-white p-6 rounded-xl shadow-md w-96 space-y-4"
       >
         <h1 className="text-xl font-bold text-center">Create Project</h1>
-        
+
         <input
           type="text"
           placeholder="Project Name"
@@ -57,8 +65,10 @@ export default function Page() {
         />
 
         <input
-          type="file"
-          onChange={(e) => setProjectFile(e.target.files?.[0] || null)}
+          type="url"
+          placeholder="GitHub URL"
+          value={githubUrl}
+          onChange={(e) => setGithubUrl(e.target.value)}
           className="w-full border border-gray-300 p-2 rounded-lg"
         />
 
