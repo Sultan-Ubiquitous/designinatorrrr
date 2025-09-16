@@ -2,15 +2,14 @@
 import { useState } from "react";
 
 export default function Page() {
-  const [projectName, setProjectName] = useState("");
   const [githubUrl, setGithubUrl] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!projectName || !githubUrl) {
-      setMessage("Please provide both Project Name and GitHub URL.");
+    if (!githubUrl) {
+      setMessage("Please provide a GitHub URL.");
       return;
     }
 
@@ -24,7 +23,6 @@ export default function Page() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          projectName,
           gitUrl: githubUrl,
         }),
         // FIX: Added 'credentials: include' to send session cookies 
@@ -34,7 +32,6 @@ export default function Page() {
 
       if (res.ok) {
         setMessage("Project created successfully!");
-        setProjectName("");
         setGithubUrl("");
       } else {
         const errorData = await res.json();
@@ -55,14 +52,6 @@ export default function Page() {
         className="bg-white p-6 rounded-xl shadow-md w-96 space-y-4"
       >
         <h1 className="text-xl font-bold text-center">Create Project</h1>
-
-        <input
-          type="text"
-          placeholder="Project Name"
-          value={projectName}
-          onChange={(e) => setProjectName(e.target.value)}
-          className="w-full border border-gray-300 p-2 rounded-lg"
-        />
 
         <input
           type="url"

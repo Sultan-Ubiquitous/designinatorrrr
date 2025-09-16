@@ -1,6 +1,7 @@
 import express from 'express';
 import {Router, Request, Response} from 'express';
-import { filterFrontendFiles, getRepoFiles, getRepoOwner } from '../utils/githubFunction.js';
+import { getRepoFiles, getRepoOwner } from '../utils/githubFunction.js';
+import { filterFrontendFiles } from '../utils/filterFunctions.js';
 import auth from '../utils/auth.js';
 import { fromNodeHeaders } from 'better-auth/node';
 import prisma from '../utils/prisma.js';
@@ -10,7 +11,7 @@ const router: Router = express.Router();
 
 router.post('/sendFiles', async (req: Request, res: Response) => {
     try {
-        let {projectName, gitUrl } = req.body;
+        let { gitUrl } = req.body;
     
     const session = await auth.api.getSession({
         headers: fromNodeHeaders(req.headers)
@@ -25,13 +26,11 @@ router.post('/sendFiles', async (req: Request, res: Response) => {
     const files = await getRepoFiles(owner, repo);
     const frontendFiles = await filterFrontendFiles(owner, repo, files);
 
-    if(!projectName){
-     projectName = repo;   
-    }
     
     const project = await prisma.project.create({
       data: {
-        name: projectName,
+        name: repo,
+        githubOwner: owner,
         userId: userId,
         files: {
           create: frontendFiles.map((file) => ({

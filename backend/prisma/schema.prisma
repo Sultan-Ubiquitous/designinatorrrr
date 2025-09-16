@@ -77,6 +77,7 @@ model Verification {
 model Project {
   id String @id @default(cuid())
   name String
+  githubOwner String @default("Unkown")
   user User @relation(fields: [userId], references: [id])
   userId String
   createdAt DateTime @default(now())
